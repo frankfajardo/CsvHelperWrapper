@@ -51,7 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DbContextExtension.cs" />
+    <Compile Include="ICsvClassMapFactory.cs" />
+    <Compile Include="ImportAction.cs" />
     <Compile Include="ImportHandler.cs" />
+    <Compile Include="ImportResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

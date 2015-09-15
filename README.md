@@ -10,7 +10,7 @@ MIT License.
 
 This is just a simple wrapper for the CsvHelper utility so that you can do this:
 ```
-ImportHandler.ImportAsync<DbContext, TEntity>(textreader);
+ImportHandler.ImportAsync<DbContext, TEntity>(csvFilePath);
 ```
 
 and this will handle the update to the database.
@@ -19,35 +19,35 @@ and this will handle the update to the database.
 
 ```
 ImportHandler.ImportAsync<DbContext, TEntity>(
-    TextReader textReader,
-    UpdateOption updateOption,
-    CsvClassMap<TEntity> mapper,
-    Encoding csvEncoding,
-    bool csvHasHeader,
-    IProgress<string> progress,
-    CancellationToken cancelToken)
+    string CsvFilePath
+    ImportAction ImportAction,
+    Encoding Encoding,
+    ICsvClassMapFactory CsvClassMapFactory,
+    bool HasHeaderRow,
+    IProgress<string> Progress,
+    CancellationToken CancelToken)
 ````
 
-##### `textReader`
-This is your csv input.
+##### CsvFilePath
+This contains the full UNC path of the csv file to import.
 
-##### `updateOption`
-This is to specify if you wish to append to the database table or clear the table first before importing the data. The default action is to append data.
+##### ImportAction
+This specifies whether to append to the relevant dataset or replace (ie, clear existing) content of that dataset before importing data
 
-##### `mapper`
-Specify a `CsvMapper<TEntity>` if your csv does not exactly match your database table.
+##### Encoding
+This specifies the encoding of the import file. Defaults to UTF8 is not specified.
 
-##### `csvEncoding`
-This defaults to UTF8 is not specified.
+##### CsvClassMapFactory
+This specified the factory responsible for generating a `CsvClassMap<TEntity>` for this import.
 
-##### `csvHasHeader`
-Defaults to false.
+##### HasHeaderRow
+This indicates if the csv file as a header row. Defaults to false.
 
-##### `progress`
-This is an `IProgress<string>` which returns progress text messages. Use this if you wish to monitor progress of the import.
+##### Progress
+This is an `IProgress<string>` which returns progress text messages during the operation. Use this if you wish to monitor progress of the import.
 
-##### `cancelToken`
-Provide a `CancellationToken` if you wish to be able to cancel this async import.
+##### CancelToken
+This is a `CancellationToken` you can provide if you wish to be able to cancel import.
 
 ### About CsvHelper
 
