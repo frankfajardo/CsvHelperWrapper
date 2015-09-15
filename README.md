@@ -1,9 +1,11 @@
-# CSV (Async) Import Handler (Wrapper for CsvHelper)
+# CSV Import Handler (Async) - Wrapper for CsvHelper
 
 
 ### License Info
 
 MIT License.
+
+Please note separate licensing info for [CsvHelper on GitHub].
 
 
 ### Overview
@@ -35,7 +37,7 @@ This contains the full UNC path of the csv file to import.
 This specifies whether to append to the relevant dataset or replace (ie, clear existing) content of that dataset before importing data
 
 ##### Encoding
-This specifies the encoding of the import file. Defaults to UTF8 is not specified.
+This specifies the encoding of the import file. Defaults to UTF8 if not specified.
 
 ##### CsvClassMapFactory
 This specified the factory responsible for generating a `CsvClassMap<TEntity>` for this import.
@@ -51,4 +53,6 @@ This is a `CancellationToken` you can provide if you wish to be able to cancel i
 
 ### About CsvHelper
 
-For info on CsvHelper, go [here](https://github.com/JoshClose/CsvHelper)
+For info on CsvHelper, check out [CsvHelper on Github]
+
+[CsvHelper on GitHub]:https://github.com/JoshClose/CsvHelper
