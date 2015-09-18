@@ -34,7 +34,7 @@ namespace CsvImportUtility
                 ImportAction action = ImportAction.Append,
                 Encoding encoding = null,
                 bool hasHeaderRow = false,
-                ICsvClassMapFactory mapfac = null,
+                ICsvClassMapCreate mapfac = null,
                 IProgress<string> progress = null,
                 CancellationToken cancelToken = default(CancellationToken))
             where TContext : DbContext

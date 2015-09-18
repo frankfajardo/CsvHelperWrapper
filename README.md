@@ -24,7 +24,7 @@ ImportHandler.ImportAsync<DbContext, TEntity>(
     string CsvFilePath
     ImportAction ImportAction,
     Encoding Encoding,
-    ICsvClassMapFactory CsvClassMapFactory,
+    ICsvClassMapCreate CsvClassMapCreator,
     bool HasHeaderRow,
     IProgress<string> Progress,
     CancellationToken CancelToken)
@@ -39,8 +39,8 @@ This specifies whether to append to the relevant dataset or replace (ie, clear e
 ##### Encoding
 This specifies the encoding of the import file. Defaults to UTF8 if not specified.
 
-##### CsvClassMapFactory
-This specified the factory responsible for generating a `CsvClassMap<TEntity>` for this import.
+##### CsvClassMapCreator
+This specifies the creator of a `CsvClassMap<TEntity>` for this import. If not specified, CsvHelper's auto-map behaviour is applied for the import.
 
 ##### HasHeaderRow
 This indicates if the csv file as a header row. Defaults to false.
