@@ -23,9 +23,7 @@ and this will handle the update to the database.
 ImportHandler.ImportAsync<DbContext, TEntity>(
     string CsvFilePath
     ImportAction ImportAction,
-    Encoding Encoding,
-    ICsvClassMapCreate CsvClassMapCreator,
-    bool HasHeaderRow,
+    CsvConfiguration config,
     IProgress<string> Progress,
     CancellationToken CancelToken)
 ````
@@ -36,14 +34,8 @@ This contains the full UNC path of the csv file to import.
 ##### ImportAction
 This specifies whether to append to the relevant dataset or replace (ie, clear existing) content of that dataset before importing data
 
-##### Encoding
-This specifies the encoding of the import file. Defaults to UTF8 if not specified.
-
-##### CsvClassMapCreator
-This specifies the creator of a `CsvClassMap<TEntity>` for this import. If not specified, CsvHelper's auto-map behaviour is applied for the import.
-
-##### HasHeaderRow
-This indicates if the csv file as a header row. Defaults to false.
+##### CsvConfiguration
+This is the [CsvConfiguration] to use, if not using the default configuration for CsvHelper. You can specify here how to read the csv file, or how to map it to the target `TEntity` if the row structure of your csv does not quite match the target.
 
 ##### Progress
 This is an `IProgress<string>` which returns progress text messages during the operation. Use this if you wish to monitor progress of the import.
@@ -53,6 +45,8 @@ This is a `CancellationToken` you can provide if you wish to be able to cancel i
 
 ### About CsvHelper
 
-For info on CsvHelper, check out [CsvHelper on Github]
+For info on CsvHelper, check out [CsvHelper documentation]
 
+[CsvHelper documentation]:http://joshclose.github.io/CsvHelper/
+[CsvConfiguration]:http://joshclose.github.io/CsvHelper/\#configuration
 [CsvHelper on GitHub]:https://github.com/JoshClose/CsvHelper

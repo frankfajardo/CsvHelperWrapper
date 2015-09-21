@@ -52,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbContextExtension.cs" />
-    <Compile Include="ICsvClassMapCreate.cs" />
     <Compile Include="ImportAction.cs" />
     <Compile Include="ImportHandler.cs" />
     <Compile Include="ImportResult.cs" />

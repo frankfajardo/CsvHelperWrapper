@@ -22,9 +22,7 @@ namespace CsvImportUtility
         /// <typeparam name="TEntity">The data entity to update</typeparam>
         /// <param name="importCsvPath">The import file's full path</param>
         /// <param name="action">Determines how to update the dataset for this import</param>
-        /// <param name="encoding">The encoding of the import file</param>
-        /// <param name="hasHeaderRow">Determines if the import file has a header row</param>
-        /// <param name="mapfac">The factory class to use to generate a mapper between the import data and the data entity</param>
+        /// <param name="config">The required CsvHelper configuration object to use for this import, if not using the default</param>
         /// <param name="progress">The class to container progress details</param>
         /// <param name="cancelToken">The token for cancelling the import task</param>
         /// <exception cref="InvalidOperationException">When unable to create instance of TContext, of when TContext does not have a DbSet&gt;TEntity&lt;</exception>
@@ -32,9 +30,7 @@ namespace CsvImportUtility
         public async static Task<ImportResult> ImportAsync<TContext, TEntity>(
                 string importCsvPath,
                 ImportAction action = ImportAction.Append,
-                Encoding encoding = null,
-                bool hasHeaderRow = false,
-                ICsvClassMapCreate mapfac = null,
+                CsvConfiguration config = null,
                 IProgress<string> progress = null,
                 CancellationToken cancelToken = default(CancellationToken))
             where TContext : DbContext
@@ -61,15 +57,7 @@ namespace CsvImportUtility
             }
 
             // Define and configure our CsvReader
-            var csvConfig = new CsvConfiguration();
-            if (mapfac != null && mapfac.HasMap<TEntity>())
-            {
-                var mapper = mapfac.GetMap<TEntity>();
-                csvConfig.RegisterClassMap(mapper);
-            }
-            csvConfig.HasHeaderRecord = hasHeaderRow;
-            csvConfig.Encoding = (encoding != null) ? encoding : Encoding.UTF8;
-            csvConfig.SkipEmptyRecords = true;
+            var csvConfig = (config != null) ? config : new CsvConfiguration();
 
             // Create instance of dbcontext. This will throw an InvalidOperationException if it fails for any reason.
             TContext dbContext = ImportHandler.CreateNewDbContext<TContext>();
